@@ -1,6 +1,6 @@
 export class AIService {
   private static instance: AIService
-  private apiKey = import.meta.env.VITE_OPENAI_API_KEY
+  private apiKey = process.env.VITE_OPENAI_API_KEY
 
   public static getInstance(): AIService {
     if (!AIService.instance) {
