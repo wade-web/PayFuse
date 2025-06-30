@@ -4,14 +4,14 @@ import axios from 'axios'
 export class PaymentService {
   private static instance: PaymentService
   private orangeMoneyConfig = {
-    clientId: import.meta.env.VITE_ORANGE_MONEY_CLIENT_ID,
-    clientSecret: import.meta.env.VITE_ORANGE_MONEY_CLIENT_SECRET,
-    baseUrl: import.meta.env.VITE_ORANGE_MONEY_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1'
+    clientId: process.env.VITE_ORANGE_MONEY_CLIENT_ID,
+    clientSecret: process.env.VITE_ORANGE_MONEY_CLIENT_SECRET,
+    baseUrl: process.env.VITE_ORANGE_MONEY_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1'
   }
 
   private waveConfig = {
-    apiKey: import.meta.env.VITE_WAVE_API_KEY,
-    baseUrl: import.meta.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
+    apiKey: process.env.VITE_WAVE_API_KEY,
+    baseUrl: process.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
   }
 
   public static getInstance(): PaymentService {
