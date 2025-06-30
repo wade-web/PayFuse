@@ -122,8 +122,8 @@ export class TestingService {
     tests.push(await this.runTest('orange-money', 'Orange Money Sandbox', async () => {
       // Simuler un test de connexion Orange Money
       const config = {
-        clientId: import.meta.env.VITE_ORANGE_MONEY_CLIENT_ID,
-        baseUrl: import.meta.env.VITE_ORANGE_MONEY_BASE_URL
+        clientId: process.env.VITE_ORANGE_MONEY_CLIENT_ID,
+        baseUrl: process.env.VITE_ORANGE_MONEY_BASE_URL
       }
 
       if (!config.clientId) {
@@ -139,8 +139,8 @@ export class TestingService {
     // Test Wave
     tests.push(await this.runTest('wave', 'Wave Test Environment', async () => {
       const config = {
-        apiKey: import.meta.env.VITE_WAVE_API_KEY,
-        baseUrl: import.meta.env.VITE_WAVE_BASE_URL
+        apiKey: process.env.VITE_WAVE_API_KEY,
+        baseUrl: process.env.VITE_WAVE_BASE_URL
       }
 
       if (!config.apiKey) {
@@ -155,8 +155,8 @@ export class TestingService {
     // Test MTN MoMo
     tests.push(await this.runTest('mtn-momo', 'MTN MoMo Sandbox', async () => {
       const config = {
-        apiKey: import.meta.env.VITE_MTN_MOMO_API_KEY,
-        baseUrl: import.meta.env.VITE_MTN_MOMO_BASE_URL
+        apiKey: process.env.VITE_MTN_MOMO_API_KEY,
+        baseUrl: process.env.VITE_MTN_MOMO_BASE_URL
       }
 
       // MTN MoMo peut ne pas être configuré
