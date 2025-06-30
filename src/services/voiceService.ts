@@ -66,7 +66,7 @@ export class VoiceService {
       throw new Error('Clé API ElevenLabs manquante')
     }
 
-    const headers: Record<string, string> = {
+    const headers: HeadersInit = {
       'Accept': 'audio/mpeg',
       'Content-Type': 'application/json',
       'xi-api-key': this.elevenLabsApiKey
