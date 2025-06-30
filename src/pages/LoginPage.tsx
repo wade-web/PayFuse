@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Shield, Zap, Globe, Brain, Mic, QrCode } from 'lucide-react'
 import { useAuthStore } from '../store/authStore'
+import BoltBadge from '../components/BoltBadge'
 import toast from 'react-hot-toast'
 
 const LoginPage = () => {
@@ -45,7 +46,10 @@ const LoginPage = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4 relative">
+      {/* Badge Bolt.new en haut à droite */}
+      <BoltBadge variant="light" position="top-right" size="md" />
+      
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 items-center">
         {/* Left Side - Branding & Features */}
         <motion.div
