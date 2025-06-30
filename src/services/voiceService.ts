@@ -1,6 +1,6 @@
 export class VoiceService {
   private static instance: VoiceService
-  private elevenLabsApiKey = import.meta.env.VITE_ELEVENLABS_API_KEY
+  private elevenLabsApiKey = process.env.VITE_ELEVENLABS_API_KEY
   private recognition: any = null
   private synthesis: SpeechSynthesis
 
