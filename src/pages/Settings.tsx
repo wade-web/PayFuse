@@ -3,6 +3,13 @@ import { motion } from 'framer-motion'
 import { Settings as SettingsIcon, User, Bell, Shield, CreditCard, Globe, Save } from 'lucide-react'
 import toast from 'react-hot-toast'
 
+interface ProviderConfig {
+  enabled: boolean
+  environment: string
+  clientId?: string
+  apiKey?: string
+}
+
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [settings, setSettings] = useState({
@@ -30,17 +37,17 @@ const Settings = () => {
         enabled: true,
         clientId: 'your_client_id',
         environment: 'sandbox'
-      },
+      } as ProviderConfig,
       wave: {
         enabled: true,
         apiKey: 'your_api_key',
         environment: 'test'
-      },
+      } as ProviderConfig,
       mtnMomo: {
         enabled: false,
         apiKey: '',
         environment: 'sandbox'
-      }
+      } as ProviderConfig
     }
   })
 
@@ -299,7 +306,7 @@ const Settings = () => {
                             </label>
                             <input
                               type="text"
-                              value={provider.clientId || provider.apiKey}
+                              value={provider.clientId || provider.apiKey || ''}
                               onChange={(e) => updateNestedSetting(
                                 'providers', 
                                 providerKey, 
