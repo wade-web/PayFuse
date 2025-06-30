@@ -3,15 +3,14 @@ import axios from 'axios'
 
 export class PaymentService {
   private static instance: PaymentService
-  private orangeMoneyConfig = {
-    clientId: process.env.VITE_ORANGE_MONEY_CLIENT_ID,
-    clientSecret: process.env.VITE_ORANGE_MONEY_CLIENT_SECRET,
-    baseUrl: process.env.VITE_ORANGE_MONEY_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1'
+  private orangeMoneyConfig: {
+    clientId: string
+    clientSecret: string
+    baseUrl: string
   }
-
-  private waveConfig = {
-    apiKey: process.env.VITE_WAVE_API_KEY,
-    baseUrl: process.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
+  private waveConfig: {
+    apiKey: string
+    baseUrl: string
   }
 
   public static getInstance(): PaymentService {
@@ -19,6 +18,19 @@ export class PaymentService {
       PaymentService.instance = new PaymentService()
     }
     return PaymentService.instance
+  }
+
+  constructor() {
+    this.orangeMoneyConfig = {
+      clientId: process.env.VITE_ORANGE_MONEY_CLIENT_ID || '',
+      clientSecret: process.env.VITE_ORANGE_MONEY_CLIENT_SECRET || '',
+      baseUrl: process.env.VITE_ORANGE_MONEY_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1'
+    }
+
+    this.waveConfig = {
+      apiKey: process.env.VITE_WAVE_API_KEY || '',
+      baseUrl: process.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
+    }
   }
 
   async createPayment(paymentData: Omit<Payment, 'id' | 'created_at' | 'user_id'>): Promise<Payment> {
@@ -70,6 +82,10 @@ export class PaymentService {
 
   private async createOrangeMoneyPayment(payment: Payment) {
     try {
+      if (!this.orangeMoneyConfig.clientId || !this.orangeMoneyConfig.clientSecret) {
+        throw new Error('Configuration Orange Money manquante')
+      }
+
       // Obtenir le token d'accès
       const tokenResponse = await axios.post(`${this.orangeMoneyConfig.baseUrl}/oauth/token`, {
         grant_type: 'client_credentials'
@@ -116,6 +132,10 @@ export class PaymentService {
 
   private async createWavePayment(payment: Payment) {
     try {
+      if (!this.waveConfig.apiKey) {
+        throw new Error('Configuration Wave manquante')
+      }
+
       const response = await axios.post(
         `${this.waveConfig.baseUrl}/checkout/sessions`,
         {
