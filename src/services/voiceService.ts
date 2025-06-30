@@ -1,6 +1,6 @@
 export class VoiceService {
   private static instance: VoiceService
-  private elevenLabsApiKey = process.env.VITE_ELEVENLABS_API_KEY
+  private elevenLabsApiKey: string
   private recognition: any = null
   private synthesis: SpeechSynthesis
 
@@ -12,6 +12,7 @@ export class VoiceService {
   }
 
   constructor() {
+    this.elevenLabsApiKey = process.env.VITE_ELEVENLABS_API_KEY || ''
     this.synthesis = window.speechSynthesis
     
     // Initialiser la reconnaissance vocale si disponible
@@ -61,13 +62,19 @@ export class VoiceService {
   }
 
   private async speakWithElevenLabs(text: string): Promise<void> {
+    if (!this.elevenLabsApiKey) {
+      throw new Error('Clé API ElevenLabs manquante')
+    }
+
+    const headers: Record<string, string> = {
+      'Accept': 'audio/mpeg',
+      'Content-Type': 'application/json',
+      'xi-api-key': this.elevenLabsApiKey
+    }
+
     const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM', {
       method: 'POST',
-      headers: {
-        'Accept': 'audio/mpeg',
-        'Content-Type': 'application/json',
-        'xi-api-key': this.elevenLabsApiKey
-      },
+      headers,
       body: JSON.stringify({
         text,
         model_id: 'eleven_multilingual_v2',
