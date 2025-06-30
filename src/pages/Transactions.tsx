@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Plus, Search, Filter, Download, Eye, RefreshCw, Calendar } from 'lucide-react'
-import { PaymentService } from '../services/paymentService'
 import { useAuthStore } from '../store/authStore'
 import toast from 'react-hot-toast'
 
@@ -33,11 +32,19 @@ const Transactions: React.FC = () => {
   const loadTransactions = async () => {
     try {
       setLoading(true)
-      if (user?.id) {
-        const paymentService = PaymentService.getInstance()
-        const data = await paymentService.getPayments(user.id)
-        setTransactions(data)
-      }
+      // Simuler le chargement des transactions
+      const mockTransactions: Transaction[] = Array.from({ length: 20 }, (_, i) => ({
+        id: `txn_${Date.now()}_${i}`,
+        amount: Math.floor(Math.random() * 100000) + 1000,
+        currency: 'XOF',
+        provider: ['Orange Money', 'Wave', 'MTN MoMo'][Math.floor(Math.random() * 3)],
+        phone: `+221${Math.floor(Math.random() * 90000000 + 10000000)}`,
+        status: ['completed', 'pending', 'failed'][Math.floor(Math.random() * 3)] as any,
+        description: `Transaction ${i + 1}`,
+        createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString()
+      }))
+      
+      setTransactions(mockTransactions)
     } catch (error) {
       console.error('Erreur chargement transactions:', error)
       toast.error('Erreur lors du chargement des transactions')
