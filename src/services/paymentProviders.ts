@@ -297,11 +297,14 @@ export class MTNMoMoProvider implements PaymentProvider {
 }
 
 export class PaymentProviderFactory {
-  private static providers: Map<string, PaymentProvider> = new Map([
-    ['orange_money', new OrangeMoneyProvider()],
-    ['wave', new WaveProvider()],
-    ['mtn_momo', new MTNMoMoProvider()]
-  ])
+  private static providers: Map<string, PaymentProvider> = new Map()
+
+  static {
+    // Initialiser les providers
+    this.providers.set('orange_money', new OrangeMoneyProvider())
+    this.providers.set('wave', new WaveProvider())
+    this.providers.set('mtn_momo', new MTNMoMoProvider())
+  }
 
   static getProvider(providerName: string): PaymentProvider {
     const provider = this.providers.get(providerName.toLowerCase())
