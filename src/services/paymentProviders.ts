@@ -11,9 +11,9 @@ export interface PaymentProvider {
 
 export class OrangeMoneyProvider implements PaymentProvider {
   name = 'Orange Money'
-  private clientId = import.meta.env.VITE_ORANGE_MONEY_CLIENT_ID
-  private clientSecret = import.meta.env.VITE_ORANGE_MONEY_CLIENT_SECRET
-  private baseUrl = import.meta.env.VITE_ORANGE_MONEY_BASE_URL
+  private clientId = process.env.VITE_ORANGE_MONEY_CLIENT_ID
+  private clientSecret = process.env.VITE_ORANGE_MONEY_CLIENT_SECRET
+  private baseUrl = process.env.VITE_ORANGE_MONEY_BASE_URL
 
   async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
     try {
@@ -103,15 +103,15 @@ export class OrangeMoneyProvider implements PaymentProvider {
   }
 
   private async verifyWebhookSignature(payload: any, signature: string): Promise<boolean> {
-    const secret = import.meta.env.VITE_WEBHOOK_SECRET
+    const secret = process.env.VITE_WEBHOOK_SECRET
     return await SecurityUtils.verifyWebhookSignature(JSON.stringify(payload), signature, secret)
   }
 }
 
 export class WaveProvider implements PaymentProvider {
   name = 'Wave'
-  private apiKey = import.meta.env.VITE_WAVE_API_KEY
-  private baseUrl = import.meta.env.VITE_WAVE_BASE_URL
+  private apiKey = process.env.VITE_WAVE_API_KEY
+  private baseUrl = process.env.VITE_WAVE_BASE_URL
 
   async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
     try {
@@ -187,8 +187,8 @@ export class WaveProvider implements PaymentProvider {
 
 export class MTNMoMoProvider implements PaymentProvider {
   name = 'MTN MoMo'
-  private apiKey = import.meta.env.VITE_MTN_MOMO_API_KEY
-  private baseUrl = import.meta.env.VITE_MTN_MOMO_BASE_URL
+  private apiKey = process.env.VITE_MTN_MOMO_API_KEY
+  private baseUrl = process.env.VITE_MTN_MOMO_BASE_URL
 
   async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
     try {
@@ -210,7 +210,7 @@ export class MTNMoMoProvider implements PaymentProvider {
             'Authorization': `Bearer ${this.apiKey}`,
             'Content-Type': 'application/json',
             'X-Reference-Id': SecurityUtils.generateTransactionId('mtn'),
-            'X-Target-Environment': import.meta.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
+            'X-Target-Environment': process.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
           }
         }
       )
@@ -230,7 +230,7 @@ export class MTNMoMoProvider implements PaymentProvider {
       const response = await axios.get(`${this.baseUrl}/collection/v1_0/requesttopay/${providerPaymentId}`, {
         headers: {
           'Authorization': `Bearer ${this.apiKey}`,
-          'X-Target-Environment': import.meta.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
+          'X-Target-Environment': process.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
         }
       })
 
