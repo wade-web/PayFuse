@@ -15,6 +15,10 @@ import WebhookManager from './pages/WebhookManager'
 import SecurityCenter from './pages/SecurityCenter'
 import AssistantInterface from './components/AssistantInterface'
 import NotificationCenter from './components/NotificationCenter'
+<<<<<<< HEAD
+=======
+import BoltBadge from './components/BoltBadge'
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
 import { useAuthStore } from './store/authStore'
 import LoginPage from './pages/LoginPage'
 
@@ -58,8 +62,20 @@ function App() {
       {/* Interface d'assistance organisée */}
       <AssistantInterface />
       <NotificationCenter />
+<<<<<<< HEAD
+=======
+      
+      {/* Badge Bolt.new en bas à droite avec assistant vocal */}
+      <div className="fixed bottom-6 right-24 z-40">
+        <BoltBadge variant="dark" position="bottom-right" size="md" />
+      </div>
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
     </div>
   )
 }
 
+<<<<<<< HEAD
 export default App
+=======
+export default App
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

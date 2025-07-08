@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export class PaymentService {
   private static instance: PaymentService
+<<<<<<< HEAD
   private orangeMoneyConfig = {
     clientId: import.meta.env.VITE_ORANGE_MONEY_CLIENT_ID,
     clientSecret: import.meta.env.VITE_ORANGE_MONEY_CLIENT_SECRET,
@@ -12,6 +13,16 @@ export class PaymentService {
   private waveConfig = {
     apiKey: import.meta.env.VITE_WAVE_API_KEY,
     baseUrl: import.meta.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
+=======
+  private orangeMoneyConfig: {
+    clientId: string
+    clientSecret: string
+    baseUrl: string
+  }
+  private waveConfig: {
+    apiKey: string
+    baseUrl: string
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
   }
 
   public static getInstance(): PaymentService {
@@ -21,6 +32,22 @@ export class PaymentService {
     return PaymentService.instance
   }
 
+<<<<<<< HEAD
+=======
+  constructor() {
+    this.orangeMoneyConfig = {
+      clientId: process.env.VITE_ORANGE_MONEY_CLIENT_ID || '',
+      clientSecret: process.env.VITE_ORANGE_MONEY_CLIENT_SECRET || '',
+      baseUrl: process.env.VITE_ORANGE_MONEY_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1'
+    }
+
+    this.waveConfig = {
+      apiKey: process.env.VITE_WAVE_API_KEY || '',
+      baseUrl: process.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
+    }
+  }
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
   async createPayment(paymentData: Omit<Payment, 'id' | 'created_at' | 'user_id'>): Promise<Payment> {
     try {
       // 1. Créer le paiement dans Supabase
@@ -70,6 +97,13 @@ export class PaymentService {
 
   private async createOrangeMoneyPayment(payment: Payment) {
     try {
+<<<<<<< HEAD
+=======
+      if (!this.orangeMoneyConfig.clientId || !this.orangeMoneyConfig.clientSecret) {
+        throw new Error('Configuration Orange Money manquante')
+      }
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       // Obtenir le token d'accès
       const tokenResponse = await axios.post(`${this.orangeMoneyConfig.baseUrl}/oauth/token`, {
         grant_type: 'client_credentials'
@@ -116,6 +150,13 @@ export class PaymentService {
 
   private async createWavePayment(payment: Payment) {
     try {
+<<<<<<< HEAD
+=======
+      if (!this.waveConfig.apiKey) {
+        throw new Error('Configuration Wave manquante')
+      }
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       const response = await axios.post(
         `${this.waveConfig.baseUrl}/checkout/sessions`,
         {
@@ -164,4 +205,8 @@ export class PaymentService {
     if (error) throw error
     return data
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

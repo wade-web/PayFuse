@@ -1,6 +1,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+<<<<<<< HEAD
 import { DivideIcon as LucideIcon } from 'lucide-react'
+=======
+import { LucideIcon } from 'lucide-react'
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
 
 interface StatsCardProps {
   title: string
@@ -66,4 +70,8 @@ const StatsCard: React.FC<StatsCardProps> = ({
   )
 }
 
+<<<<<<< HEAD
 export default StatsCard
+=======
+export default StatsCard
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

@@ -9,12 +9,20 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
+<<<<<<< HEAD
     "build:sdk": "rollup -c rollup.config.js",
+=======
+ 
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
+<<<<<<< HEAD
     "prepare": "npm run build:sdk"
+=======
+    "prepare": "npm run build"
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
   },
   "keywords": [
     "payfuse",

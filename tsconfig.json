@@ -25,7 +25,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
+<<<<<<< HEAD
   "include": ["src",
     "vite-env.d.ts"],
+=======
+  "include": ["src"],
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,6 +1,10 @@
 export class AIService {
   private static instance: AIService
+<<<<<<< HEAD
   private apiKey = import.meta.env.VITE_OPENAI_API_KEY
+=======
+  private apiKey = process.env.VITE_OPENAI_API_KEY
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
 
   public static getInstance(): AIService {
     if (!AIService.instance) {
@@ -129,4 +133,8 @@ Que souhaitez-vous faire spécifiquement?`
 
     return responses[prompt] || responses.default
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

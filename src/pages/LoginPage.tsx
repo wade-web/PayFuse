@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Shield, Zap, Globe, Brain, Mic, QrCode } from 'lucide-react'
 import { useAuthStore } from '../store/authStore'
+<<<<<<< HEAD
 import toast from 'react-hot-toast'
 import BoltBadge from '../components/BoltBadge'
+=======
+import BoltBadge from '../components/BoltBadge'
+import toast from 'react-hot-toast'
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
 
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' })
@@ -46,10 +51,19 @@ const LoginPage = () => {
   ]
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4">
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 items-center">
         {/* Left Side - Branding & Features */}
          <BoltBadge />
+=======
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 flex items-center justify-center p-4 relative">
+      {/* Badge Bolt.new en haut à droite */}
+      <BoltBadge variant="light" position="top-right" size="md" />
+      
+      <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-8 items-center">
+        {/* Left Side - Branding & Features */}
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -65,7 +79,10 @@ const LoginPage = () => {
             >
               PayFuse
             </motion.h1>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
             <motion.p 
               className="text-xl text-gray-300 mb-8"
               initial={{ opacity: 0, y: 20 }}
@@ -100,7 +117,10 @@ const LoginPage = () => {
           transition={{ duration: 0.6 }}
           className="bg-white rounded-2xl shadow-2xl p-8"
         >
+<<<<<<< HEAD
        
+=======
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Connexion</h2>
             <p className="text-gray-600">Accédez à votre tableau de bord PayFuse</p>
@@ -162,4 +182,8 @@ const LoginPage = () => {
   )
 }
 
+<<<<<<< HEAD
 export default LoginPage
+=======
+export default LoginPage
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

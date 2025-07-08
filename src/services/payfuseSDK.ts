@@ -214,6 +214,7 @@ export class PayFuseSDK {
 
 // Export pour utilisation comme module npm
 export default PayFuseSDK
+<<<<<<< HEAD
 
 // Types pour TypeScript
 export type {
@@ -221,3 +222,5 @@ export type {
   CreatePaymentRequest,
   PaymentResponse
 }
+=======
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

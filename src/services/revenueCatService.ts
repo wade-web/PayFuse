@@ -37,7 +37,11 @@ export class RevenueCatService {
 
   constructor() {
     this.config = {
+<<<<<<< HEAD
       apiKey: import.meta.env.VITE_REVENUECAT_API_KEY || 'demo_key',
+=======
+      apiKey: process.env.VITE_REVENUECAT_API_KEY || 'demo_key',
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       environment: 'sandbox'
     }
   }
@@ -211,4 +215,8 @@ export class RevenueCatService {
   }
 }
 
+<<<<<<< HEAD
 export default RevenueCatService
+=======
+export default RevenueCatService
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

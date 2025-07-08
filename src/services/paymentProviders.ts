@@ -11,12 +11,31 @@ export interface PaymentProvider {
 
 export class OrangeMoneyProvider implements PaymentProvider {
   name = 'Orange Money'
+<<<<<<< HEAD
   private clientId = import.meta.env.VITE_ORANGE_MONEY_CLIENT_ID
   private clientSecret = import.meta.env.VITE_ORANGE_MONEY_CLIENT_SECRET
   private baseUrl = import.meta.env.VITE_ORANGE_MONEY_BASE_URL
 
   async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
     try {
+=======
+  private clientId: string
+  private clientSecret: string
+  private baseUrl: string
+
+  constructor() {
+    this.clientId = process.env.VITE_ORANGE_MONEY_CLIENT_ID || ''
+    this.clientSecret = process.env.VITE_ORANGE_MONEY_CLIENT_SECRET || ''
+    this.baseUrl = process.env.VITE_ORANGE_MONEY_BASE_URL || 'https://api.orange.com/orange-money-webpay/dev/v1'
+  }
+
+  async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
+    try {
+      if (!this.clientId || !this.clientSecret) {
+        throw new Error('Configuration Orange Money manquante')
+      }
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       // 1. Obtenir le token d'accès
       const tokenResponse = await axios.post(`${this.baseUrl}/oauth/token`, {
         grant_type: 'client_credentials'
@@ -103,18 +122,39 @@ export class OrangeMoneyProvider implements PaymentProvider {
   }
 
   private async verifyWebhookSignature(payload: any, signature: string): Promise<boolean> {
+<<<<<<< HEAD
     const secret = import.meta.env.VITE_WEBHOOK_SECRET
+=======
+    const secret = process.env.VITE_WEBHOOK_SECRET || ''
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
     return await SecurityUtils.verifyWebhookSignature(JSON.stringify(payload), signature, secret)
   }
 }
 
 export class WaveProvider implements PaymentProvider {
   name = 'Wave'
+<<<<<<< HEAD
   private apiKey = import.meta.env.VITE_WAVE_API_KEY
   private baseUrl = import.meta.env.VITE_WAVE_BASE_URL
 
   async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
     try {
+=======
+  private apiKey: string
+  private baseUrl: string
+
+  constructor() {
+    this.apiKey = process.env.VITE_WAVE_API_KEY || ''
+    this.baseUrl = process.env.VITE_WAVE_BASE_URL || 'https://api.wave.com/v1'
+  }
+
+  async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
+    try {
+      if (!this.apiKey) {
+        throw new Error('Configuration Wave manquante')
+      }
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       const response = await axios.post(
         `${this.baseUrl}/checkout/sessions`,
         {
@@ -187,11 +227,28 @@ export class WaveProvider implements PaymentProvider {
 
 export class MTNMoMoProvider implements PaymentProvider {
   name = 'MTN MoMo'
+<<<<<<< HEAD
   private apiKey = import.meta.env.VITE_MTN_MOMO_API_KEY
   private baseUrl = import.meta.env.VITE_MTN_MOMO_BASE_URL
 
   async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
     try {
+=======
+  private apiKey: string
+  private baseUrl: string
+
+  constructor() {
+    this.apiKey = process.env.VITE_MTN_MOMO_API_KEY || ''
+    this.baseUrl = process.env.VITE_MTN_MOMO_BASE_URL || 'https://sandbox.momodeveloper.mtn.com'
+  }
+
+  async createPayment(payment: Payment): Promise<{ id: string; payment_url: string }> {
+    try {
+      if (!this.apiKey) {
+        throw new Error('Configuration MTN MoMo manquante')
+      }
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       const response = await axios.post(
         `${this.baseUrl}/collection/v1_0/requesttopay`,
         {
@@ -210,7 +267,11 @@ export class MTNMoMoProvider implements PaymentProvider {
             'Authorization': `Bearer ${this.apiKey}`,
             'Content-Type': 'application/json',
             'X-Reference-Id': SecurityUtils.generateTransactionId('mtn'),
+<<<<<<< HEAD
             'X-Target-Environment': import.meta.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
+=======
+            'X-Target-Environment': process.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
           }
         }
       )
@@ -230,7 +291,11 @@ export class MTNMoMoProvider implements PaymentProvider {
       const response = await axios.get(`${this.baseUrl}/collection/v1_0/requesttopay/${providerPaymentId}`, {
         headers: {
           'Authorization': `Bearer ${this.apiKey}`,
+<<<<<<< HEAD
           'X-Target-Environment': import.meta.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
+=======
+          'X-Target-Environment': process.env.VITE_ENVIRONMENT === 'production' ? 'live' : 'sandbox'
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
         }
       })
 
@@ -269,11 +334,22 @@ export class MTNMoMoProvider implements PaymentProvider {
 }
 
 export class PaymentProviderFactory {
+<<<<<<< HEAD
   private static providers: Map<string, PaymentProvider> = new Map([
     ['orange_money', new OrangeMoneyProvider()],
     ['wave', new WaveProvider()],
     ['mtn_momo', new MTNMoMoProvider()]
   ])
+=======
+  private static providers: Map<string, PaymentProvider> = new Map()
+
+  static {
+    // Initialiser les providers
+    this.providers.set('orange_money', new OrangeMoneyProvider())
+    this.providers.set('wave', new WaveProvider())
+    this.providers.set('mtn_momo', new MTNMoMoProvider())
+  }
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
 
   static getProvider(providerName: string): PaymentProvider {
     const provider = this.providers.get(providerName.toLowerCase())
@@ -290,4 +366,8 @@ export class PaymentProviderFactory {
   static getSupportedProviders(): string[] {
     return Array.from(this.providers.keys())
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

@@ -3,6 +3,16 @@ import { motion } from 'framer-motion'
 import { Settings as SettingsIcon, User, Bell, Shield, CreditCard, Globe, Save } from 'lucide-react'
 import toast from 'react-hot-toast'
 
+<<<<<<< HEAD
+=======
+interface ProviderConfig {
+  enabled: boolean
+  environment: string
+  clientId?: string
+  apiKey?: string
+}
+
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [settings, setSettings] = useState({
@@ -30,17 +40,29 @@ const Settings = () => {
         enabled: true,
         clientId: 'your_client_id',
         environment: 'sandbox'
+<<<<<<< HEAD
       },
+=======
+      } as ProviderConfig,
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       wave: {
         enabled: true,
         apiKey: 'your_api_key',
         environment: 'test'
+<<<<<<< HEAD
       },
+=======
+      } as ProviderConfig,
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       mtnMomo: {
         enabled: false,
         apiKey: '',
         environment: 'sandbox'
+<<<<<<< HEAD
       }
+=======
+      } as ProviderConfig
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
     }
   })
 
@@ -299,7 +321,11 @@ const Settings = () => {
                             </label>
                             <input
                               type="text"
+<<<<<<< HEAD
                               value={provider.clientId || provider.apiKey}
+=======
+                              value={provider.clientId || provider.apiKey || ''}
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
                               onChange={(e) => updateNestedSetting(
                                 'providers', 
                                 providerKey, 
@@ -387,4 +413,8 @@ const Settings = () => {
   )
 }
 
+<<<<<<< HEAD
 export default Settings
+=======
+export default Settings
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a

@@ -1,6 +1,10 @@
 export class VoiceService {
   private static instance: VoiceService
+<<<<<<< HEAD
   private elevenLabsApiKey = import.meta.env.VITE_ELEVENLABS_API_KEY
+=======
+  private elevenLabsApiKey: string
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
   private recognition: any = null
   private synthesis: SpeechSynthesis
 
@@ -12,6 +16,10 @@ export class VoiceService {
   }
 
   constructor() {
+<<<<<<< HEAD
+=======
+    this.elevenLabsApiKey = process.env.VITE_ELEVENLABS_API_KEY || ''
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
     this.synthesis = window.speechSynthesis
     
     // Initialiser la reconnaissance vocale si disponible
@@ -61,6 +69,7 @@ export class VoiceService {
   }
 
   private async speakWithElevenLabs(text: string): Promise<void> {
+<<<<<<< HEAD
     const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM', {
       method: 'POST',
       headers: {
@@ -68,6 +77,21 @@ export class VoiceService {
         'Content-Type': 'application/json',
         'xi-api-key': this.elevenLabsApiKey
       },
+=======
+    if (!this.elevenLabsApiKey) {
+      throw new Error('Clé API ElevenLabs manquante')
+    }
+
+    const headers: HeadersInit = {
+      'Accept': 'audio/mpeg',
+      'Content-Type': 'application/json',
+      'xi-api-key': this.elevenLabsApiKey
+    }
+
+    const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM', {
+      method: 'POST',
+      headers,
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
       body: JSON.stringify({
         text,
         model_id: 'eleven_multilingual_v2',
@@ -125,4 +149,8 @@ export class VoiceService {
       return 'Commande non reconnue. Essayez: "créer un paiement", "afficher les statistiques", ou "générer un rapport".'
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85a67acb3397d11bde087ffc4087800d4f9a658a
